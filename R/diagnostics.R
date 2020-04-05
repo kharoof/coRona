@@ -50,13 +50,14 @@ prediction <- function(model, duration) {
 #' Graph the trend in numbers and visually compare a fitted curve to the actual data projecting out for 3 days
 #' @param country Name of country to get data
 #' @param country_name Used if you wish to specify a different name for The title in the Graph
+#' @param cutoff If you wish to filter the data by a cutoff date enter a date here.
 #'
 #' @return
 #' @export
 #'
-visualise_fitted_vs_actual <- function(country, country_name="") {
+visualise_fitted_vs_actual <- function(country, country_name="", cutoff=Sys.Date()) {
 
-  plot.data <- get_latest_country_data(country)
+  plot.data <- get_latest_country_data(country)[value.date <= cutoff]
 
   if(country_name=="") {
     country_name <- deparse(substitute(country))
