@@ -1,14 +1,14 @@
 Package: coRona
-Title: What the Package Does (One Line, Title Case)
+Title: Downloads Covid data from the John Hopkins Website
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+    person(given = "Ed",
+           family = "Roche",
            role = c("aut", "cre"),
-           email = "first.last@example.com",
+           email = "ed.roche@yahoo.co.uk",
            comment = structure("YOUR-ORCID-ID", .Names = "ORCID"))
-Description: What the package does (one paragraph).
-License: What license it uses
+Description: The package provides some functions to downlaod the latest Covid 19 data from the JH website and to visualise the results
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports: 
