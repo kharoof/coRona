@@ -53,3 +53,18 @@ tidy_confirmed_cases <- function(raw_data){
 }
 
 
+#' Get latest dataset for a country
+#'
+#' Long form dataset showing the daily tallies of confirmed cases since the first case was reported in the country.
+#' Also shows the latest value and the first case in that country. These columns are useful for pivoting data from multiple countries
+#'
+#' @param country name of Country/Region
+#'
+#' @return
+#' @export
+#'
+get_latest_country_data <- function(country) {
+  data <- tidy_confirmed_cases(get_confirmed_cases())[country]
+  return(data)
+}
+

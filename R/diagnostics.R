@@ -48,28 +48,30 @@ prediction <- function(model, duration) {
 #' Visualise Fitted vs Actual Values
 #'
 #' Graph the trend in numbers and visually compare a fitted curve to the actual data projecting out for 3 days
-#' @param country
-#' @param country_name
+#' @param country Name of country to get data
+#' @param country_name Used if you wish to specify a different name for The title in the Graph
 #'
 #' @return
 #' @export
 #'
 visualise_fitted_vs_actual <- function(country, country_name="") {
 
+  plot.data <- get_latest_country_data(country)
+
   if(country_name=="") {
     country_name <- deparse(substitute(country))
   }
 
-  fitted_model <- fit_model(country)
+  fitted_model <- fit_model(plot.data)
 
 
   #Time period from first case to latest + 3 days
   #3 days Provides visual indication of actual vs fitted growth
-  time_period <- c(as.Date(country$value.date), last(country$value.date)+1, last(country$value.date)+2, last(country$value.date)+3)
+  time_period <- c(as.Date(plot.data$value.date), last(plot.data$value.date)+1, last(plot.data$value.date)+2, last(plot.data$value.date)+3)
 
   #Generate the data for plotting
-  fitted <- prediction(fitted_model, 1:(nrow(country)+3))
-  actual <- c(country$value, NA, NA, NA)
+  fitted <- prediction(fitted_model, 1:(nrow(plot.data)+3))
+  actual <- c(plot.data$value, NA, NA, NA)
   results <- data.table(value.date = time_period, actual = actual, prediction= fitted)
 
   ggplot2::ggplot(results, ggplot2::aes(x=value.date))+ggplot2::geom_line(ggplot2::aes(y=actual, color="red"))+
